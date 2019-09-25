@@ -13,9 +13,17 @@ public class App
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
+
+        // CREATIONAL PATTERNS
+
+        // Factory Method
         testFactoryMethod();
     }
 
+
+    // CREATIONAL PATTERNS
+
+    // Factory Method
     private static void testFactoryMethod() {
         Payment payment = PaymentFactory.buildPayment(PaymentType.GOOGLE_PAYMENT);
         payment.doPayment();
