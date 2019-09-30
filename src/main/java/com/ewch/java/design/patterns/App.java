@@ -15,17 +15,27 @@ public class App
 {
     public static void main( String[] args )
     {
-        // CREATIONAL PATTERNS
+        // JAVA DESIGN PATTERNS
         System.out.println("****************************");
         System.out.println("*** JAVA DESIGN PATTERNS ***");
         System.out.println("****************************");
+        System.out.println();
+
+
+        // CREATIONAL PATTERNS
+        System.out.println("***************************");
+        System.out.println("*** CREATIONAL PATTERNS ***");
+        System.out.println("***************************");
         System.out.println();
 
         // Factory Method
         // testFactoryMethod();
 
         // Abstract Factory
-        testAbstractFactory();
+        // testAbstractFactory();
+
+        // Builder
+        testBuilder();
     }
 
 
@@ -54,6 +64,27 @@ public class App
         System.out.println("Card number: " + card.getCardNumber());
         System.out.println("Payment Method Factory");
         System.out.println("Payment Method: " + paymentMethod.doPayment());
+    }
+
+    // Builder
+    private static void testBuilder() {
+        System.out.println("--- BUILDER ---");
+
+        com.ewch.java.design.patterns.creational.builder.Card card1 =
+                new com.ewch.java.design.patterns.creational.builder.Card.CardBuilder("VISA", "0123 4567 8910 VISA")
+                        .name("Eimer")
+                        .expires(2030)
+                        .credit(true)
+                        .build();
+        System.out.println("Builder");
+        System.out.println("Card 1:");
+        System.out.println(card1);
+
+        com.ewch.java.design.patterns.creational.builder.Card card2 =
+                new com.ewch.java.design.patterns.creational.builder.Card.CardBuilder("MASTERCARD", "0987 6543 2100 MSTR")
+                        .build();
+        System.out.println("Card 2:");
+        System.out.println(card2);
     }
 
 }
