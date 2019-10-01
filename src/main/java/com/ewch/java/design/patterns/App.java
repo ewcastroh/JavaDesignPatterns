@@ -1,12 +1,14 @@
 package com.ewch.java.design.patterns;
 
 import com.ewch.java.design.patterns.creational.abstractFactory.AbstractFactory;
-import com.ewch.java.design.patterns.creational.abstractFactory.card.Card;
 import com.ewch.java.design.patterns.creational.abstractFactory.FactoryProvider;
+import com.ewch.java.design.patterns.creational.abstractFactory.card.Card;
 import com.ewch.java.design.patterns.creational.abstractFactory.payment.PaymentMethod;
 import com.ewch.java.design.patterns.creational.factoryMethod.Payment;
 import com.ewch.java.design.patterns.creational.factoryMethod.PaymentFactory;
 import com.ewch.java.design.patterns.creational.factoryMethod.PaymentType;
+import com.ewch.java.design.patterns.creational.prototype.PrototypeCard;
+import com.ewch.java.design.patterns.creational.prototype.PrototypeFactory;
 
 /**
  * Java Design Patterns
@@ -35,7 +37,10 @@ public class App
         // testAbstractFactory();
 
         // Builder
-        testBuilder();
+        // testBuilder();
+
+        // Prototype
+        testPrototype();
     }
 
 
@@ -87,4 +92,16 @@ public class App
         System.out.println(card2);
     }
 
+    // Prototype
+    private static void testPrototype() {
+        PrototypeFactory.loadCard();
+        try {
+            PrototypeCard visa = PrototypeFactory.getInstance(PrototypeFactory.CartType.VISA);
+            visa.getCard();
+            PrototypeCard mastercard = PrototypeFactory.getInstance(PrototypeFactory.CartType.MASTERCARD);
+            mastercard.getCard();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+    }
 }
