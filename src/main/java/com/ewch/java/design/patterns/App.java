@@ -40,7 +40,10 @@ public class App
         // testBuilder();
 
         // Prototype
-        testPrototype();
+        // testPrototype();
+
+        // Singleton
+        testSingleton();
     }
 
 
@@ -94,6 +97,8 @@ public class App
 
     // Prototype
     private static void testPrototype() {
+        System.out.println("--- PROTOTYPE ---");
+
         PrototypeFactory.loadCard();
         try {
             PrototypeCard visa = PrototypeFactory.getInstance(PrototypeFactory.CartType.VISA);
@@ -103,5 +108,14 @@ public class App
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
+    }
+
+    // Singleton
+    private static void testSingleton() {
+        System.out.println("--- SINGLETON ---");
+
+        com.ewch.java.design.patterns.creational.singleton.Card card = com.ewch.java.design.patterns.creational.singleton.Card.getInstance();
+        card.setCardNumber("0132 4567 8910");
+        System.out.println("Card number: " + card.getCardNumber());
     }
 }
