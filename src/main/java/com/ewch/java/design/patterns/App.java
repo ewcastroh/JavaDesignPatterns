@@ -1,5 +1,6 @@
 package com.ewch.java.design.patterns;
 
+import com.ewch.java.design.patterns.behavioral.chainofresponsibility.Tarjeta;
 import com.ewch.java.design.patterns.creational.abstractFactory.AbstractFactory;
 import com.ewch.java.design.patterns.creational.abstractFactory.FactoryProvider;
 import com.ewch.java.design.patterns.creational.abstractFactory.card.Card;
@@ -43,7 +44,17 @@ public class App
         // testPrototype();
 
         // Singleton
-        testSingleton();
+        // testSingleton();
+
+
+        // BEHAVIORAL PATTERNS
+        System.out.println("***************************");
+        System.out.println("*** BEHAVIORAL PATTERNS ***");
+        System.out.println("***************************");
+        System.out.println();
+
+        // Chain of Responsibility
+        testChangeOfResponsibility();
     }
 
 
@@ -117,5 +128,16 @@ public class App
         com.ewch.java.design.patterns.creational.singleton.Card card = com.ewch.java.design.patterns.creational.singleton.Card.getInstance();
         card.setCardNumber("0132 4567 8910");
         System.out.println("Card number: " + card.getCardNumber());
+    }
+
+
+    // BEHAVIORAL PATTERNS
+
+    // Chain of Responsibility
+    private static void testChangeOfResponsibility() {
+        System.out.println("--- CHAIN OF RESPONSIBILITY ---");
+
+        Tarjeta tarjeta = new Tarjeta();
+        tarjeta.creditCardRequest(500000);
     }
 }
