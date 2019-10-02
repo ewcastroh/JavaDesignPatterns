@@ -1,6 +1,10 @@
 package com.ewch.java.design.patterns;
 
 import com.ewch.java.design.patterns.behavioral.chainofresponsibility.Tarjeta;
+import com.ewch.java.design.patterns.behavioral.command.CreditCard;
+import com.ewch.java.design.patterns.behavioral.command.CreditCardActivateCommand;
+import com.ewch.java.design.patterns.behavioral.command.CreditCardDeactivateCommand;
+import com.ewch.java.design.patterns.behavioral.command.CreditCardInvoker;
 import com.ewch.java.design.patterns.creational.abstractFactory.AbstractFactory;
 import com.ewch.java.design.patterns.creational.abstractFactory.FactoryProvider;
 import com.ewch.java.design.patterns.creational.abstractFactory.card.Card;
@@ -54,7 +58,10 @@ public class App
         System.out.println();
 
         // Chain of Responsibility
-        testChangeOfResponsibility();
+        // testChangeOfResponsibility();
+
+        // Command
+        testCommand();
     }
 
 
@@ -139,5 +146,22 @@ public class App
 
         Tarjeta tarjeta = new Tarjeta();
         tarjeta.creditCardRequest(500000);
+    }
+
+    // Command
+    private static void testCommand() {
+        System.out.println("--- COMMAND ---");
+
+        CreditCard creditCard = new CreditCard();
+        CreditCard creditCardDeactivate = new CreditCard();
+        CreditCardInvoker invoker = new CreditCardInvoker();
+
+        System.out.println("- Activate Command -");
+        invoker.setCommand(new CreditCardActivateCommand(creditCard));
+        invoker.run();
+
+        System.out.println("- Deactivate Command -");
+        invoker.setCommand(new CreditCardDeactivateCommand(creditCardDeactivate));
+        invoker.run();
     }
 }
