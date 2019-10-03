@@ -5,6 +5,9 @@ import com.ewch.java.design.patterns.behavioral.command.CreditCard;
 import com.ewch.java.design.patterns.behavioral.command.CreditCardActivateCommand;
 import com.ewch.java.design.patterns.behavioral.command.CreditCardDeactivateCommand;
 import com.ewch.java.design.patterns.behavioral.command.CreditCardInvoker;
+import com.ewch.java.design.patterns.behavioral.iterator.CardList;
+import com.ewch.java.design.patterns.behavioral.iterator.Iterator;
+import com.ewch.java.design.patterns.behavioral.iterator.List;
 import com.ewch.java.design.patterns.creational.abstractFactory.AbstractFactory;
 import com.ewch.java.design.patterns.creational.abstractFactory.FactoryProvider;
 import com.ewch.java.design.patterns.creational.abstractFactory.card.Card;
@@ -61,7 +64,10 @@ public class App
         // testChangeOfResponsibility();
 
         // Command
-        testCommand();
+        // testCommand();
+
+        // Iterator
+        testIterator();
     }
 
 
@@ -164,4 +170,25 @@ public class App
         invoker.setCommand(new CreditCardDeactivateCommand(creditCardDeactivate));
         invoker.run();
     }
+
+    // Iterator
+    private static void testIterator() {
+        System.out.println("--- ITERATOR ---");
+
+        com.ewch.java.design.patterns.behavioral.iterator.Card[] cards = new com.ewch.java.design.patterns.behavioral.iterator.Card[5];
+        cards[0] = new com.ewch.java.design.patterns.behavioral.iterator.Card("VISA");
+        cards[1] = new com.ewch.java.design.patterns.behavioral.iterator.Card("AMEX");
+        cards[2] = new com.ewch.java.design.patterns.behavioral.iterator.Card("MASTERCARD");
+        cards[3] = new com.ewch.java.design.patterns.behavioral.iterator.Card("DINNERS CLUB");
+        cards[4] = new com.ewch.java.design.patterns.behavioral.iterator.Card("AMERICAN EXPRESS");
+
+        List list = new CardList(cards);
+        Iterator iterator = list.iterator();
+
+        while (iterator.hasNext()) {
+            com.ewch.java.design.patterns.behavioral.iterator.Card tarjeta = (com.ewch.java.design.patterns.behavioral.iterator.Card) iterator.next();
+            System.out.println("Card: " + tarjeta.getType());
+        }
+    }
+
 }
