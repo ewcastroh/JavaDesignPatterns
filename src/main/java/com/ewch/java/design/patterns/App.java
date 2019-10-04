@@ -14,6 +14,10 @@ import com.ewch.java.design.patterns.behavioral.mediator.ConcreteMediator;
 import com.ewch.java.design.patterns.behavioral.memento.Article;
 import com.ewch.java.design.patterns.behavioral.memento.ArticleMemento;
 import com.ewch.java.design.patterns.behavioral.memento.CareTaker;
+import com.ewch.java.design.patterns.behavioral.observer.Coche;
+import com.ewch.java.design.patterns.behavioral.observer.MessagePublisher;
+import com.ewch.java.design.patterns.behavioral.observer.Peaton;
+import com.ewch.java.design.patterns.behavioral.observer.Semaforo;
 import com.ewch.java.design.patterns.creational.abstractFactory.AbstractFactory;
 import com.ewch.java.design.patterns.creational.abstractFactory.FactoryProvider;
 import com.ewch.java.design.patterns.creational.abstractFactory.card.Card;
@@ -79,7 +83,10 @@ public class App
         // testMediator();
 
         // Memento
-        testMemento();
+        // testMemento();
+
+        // Observer
+        testObserver();
     }
 
 
@@ -246,5 +253,26 @@ public class App
 
         article.setText(article.getText() + " from year XXXX");
         System.out.println("Newer state (Without memento): " + article.getText());
+    }
+
+    // Observer
+    private static void testObserver() {
+        System.out.println("--- OBSERVER ---");
+
+        Coche coche = new Coche();
+        Peaton peaton = new Peaton();
+        MessagePublisher messagePublisher = new MessagePublisher();
+
+        messagePublisher.attach(coche);
+        messagePublisher.attach(peaton);
+        messagePublisher.notifyUpdate(new Semaforo("ROJO_COCHE"));
+
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        messagePublisher.notifyUpdate(new Semaforo("VERDE_COCHE"));
     }
 }
