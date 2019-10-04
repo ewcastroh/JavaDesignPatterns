@@ -11,6 +11,9 @@ import com.ewch.java.design.patterns.behavioral.iterator.List;
 import com.ewch.java.design.patterns.behavioral.mediator.ConcreteColleague1;
 import com.ewch.java.design.patterns.behavioral.mediator.ConcreteColleague2;
 import com.ewch.java.design.patterns.behavioral.mediator.ConcreteMediator;
+import com.ewch.java.design.patterns.behavioral.memento.Article;
+import com.ewch.java.design.patterns.behavioral.memento.ArticleMemento;
+import com.ewch.java.design.patterns.behavioral.memento.CareTaker;
 import com.ewch.java.design.patterns.creational.abstractFactory.AbstractFactory;
 import com.ewch.java.design.patterns.creational.abstractFactory.FactoryProvider;
 import com.ewch.java.design.patterns.creational.abstractFactory.card.Card;
@@ -73,7 +76,10 @@ public class App
         // testIterator();
 
         // Mediator
-        testMediator();
+        // testMediator();
+
+        // Memento
+        testMemento();
     }
 
 
@@ -210,4 +216,35 @@ public class App
         user2.send("Hi user1, I'm user2");
     }
 
+    // Memento
+    private static void testMemento() {
+        System.out.println("--- MEMENTO ---");
+
+        CareTaker careTaker = new CareTaker();
+        Article article = new Article("Eimer", "Memento is a movie");
+        article.setText(article.getText() + " from Nolan");
+        System.out.println("Text from originator without memento: " + article.getText());
+
+        careTaker.addMemento(article.createMemento());
+        article.setText(article.getText() + " starred by Guy Pearce");
+        System.out.println("Text after first createMemento without memento: " + article.getText());
+
+        careTaker.addMemento(article.createMemento());
+        System.out.println("Text after second memento: " + article.getText());
+
+        article.setText(article.getText() + " and Leonardo DiCaprio");
+        System.out.println("Text after a wrong added text: " + article.getText());
+
+        ArticleMemento memento1 = careTaker.getMemento(0);
+        ArticleMemento memento2 = careTaker.getMemento(1);
+
+        article.restoreMemento(memento1);
+        System.out.println("Restored text from memento1: " + article.getText());
+
+        article.restoreMemento(memento2);
+        System.out.println("Restored text from memento2: " + article.getText());
+
+        article.setText(article.getText() + " from year XXXX");
+        System.out.println("Newer state (Without memento): " + article.getText());
+    }
 }
