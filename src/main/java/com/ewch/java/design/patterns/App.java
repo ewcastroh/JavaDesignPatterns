@@ -8,6 +8,9 @@ import com.ewch.java.design.patterns.behavioral.command.CreditCardInvoker;
 import com.ewch.java.design.patterns.behavioral.iterator.CardList;
 import com.ewch.java.design.patterns.behavioral.iterator.Iterator;
 import com.ewch.java.design.patterns.behavioral.iterator.List;
+import com.ewch.java.design.patterns.behavioral.mediator.ConcreteColleague1;
+import com.ewch.java.design.patterns.behavioral.mediator.ConcreteColleague2;
+import com.ewch.java.design.patterns.behavioral.mediator.ConcreteMediator;
 import com.ewch.java.design.patterns.creational.abstractFactory.AbstractFactory;
 import com.ewch.java.design.patterns.creational.abstractFactory.FactoryProvider;
 import com.ewch.java.design.patterns.creational.abstractFactory.card.Card;
@@ -67,7 +70,10 @@ public class App
         // testCommand();
 
         // Iterator
-        testIterator();
+        // testIterator();
+
+        // Mediator
+        testMediator();
     }
 
 
@@ -189,6 +195,19 @@ public class App
             com.ewch.java.design.patterns.behavioral.iterator.Card tarjeta = (com.ewch.java.design.patterns.behavioral.iterator.Card) iterator.next();
             System.out.println("Card: " + tarjeta.getType());
         }
+    }
+
+    // Mediator
+    private static void testMediator() {
+        System.out.println("--- MEDIATOR ---");
+
+        ConcreteMediator mediator = new ConcreteMediator();
+        ConcreteColleague1 user1 = new ConcreteColleague1(mediator);
+        ConcreteColleague2 user2 = new ConcreteColleague2(mediator);
+        mediator.setUser1(user1);
+        mediator.setUser2(user2);
+        user1.send("Hi, I'm user1");
+        user2.receiveMessage("Hi user1, I'm user2");
     }
 
 }
