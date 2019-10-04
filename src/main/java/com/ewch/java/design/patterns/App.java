@@ -207,7 +207,7 @@ public class App
         mediator.setUser1(user1);
         mediator.setUser2(user2);
         user1.send("Hi, I'm user1");
-        user2.receiveMessage("Hi user1, I'm user2");
+        user2.send("Hi user1, I'm user2");
     }
 
 }
