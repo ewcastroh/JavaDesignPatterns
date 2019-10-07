@@ -25,6 +25,9 @@ import com.ewch.java.design.patterns.behavioral.observer.Semaforo;
 import com.ewch.java.design.patterns.behavioral.state.MobileAlertStateContext;
 import com.ewch.java.design.patterns.behavioral.state.Silent;
 import com.ewch.java.design.patterns.behavioral.state.Vibration;
+import com.ewch.java.design.patterns.behavioral.strategy.CapitalStrategyTextFormatter;
+import com.ewch.java.design.patterns.behavioral.strategy.Context;
+import com.ewch.java.design.patterns.behavioral.strategy.LowerStrategyTextFormatter;
 import com.ewch.java.design.patterns.creational.abstractFactory.AbstractFactory;
 import com.ewch.java.design.patterns.creational.abstractFactory.FactoryProvider;
 import com.ewch.java.design.patterns.creational.abstractFactory.card.Card;
@@ -99,7 +102,10 @@ public class App
         // testState();
 
         // Interpreter
-        testInterpreter();
+        // testInterpreter();
+
+        // Strategy
+        testStrategy();
     }
 
 
@@ -319,5 +325,16 @@ public class App
 
         System.out.println("containOneAndCero.interpret('0'): " + containOneAndCero.interpret("0"));
         System.out.println("containOneAndCero.interpret('0, 1'): " + containOneAndCero.interpret("0, 1"));
+    }
+
+    // Strategy
+    private static void testStrategy() {
+        System.out.println("--- STRATEGY ---");
+
+        Context contextUpperCase = new Context(new CapitalStrategyTextFormatter());
+        contextUpperCase.publishText("This text will be turn in UPPERCASE using the algorithm.");
+
+        Context contextLowerCase = new Context(new LowerStrategyTextFormatter());
+        contextLowerCase.publishText("THIS TEXT WILL BE TURN IN lowercase USING THE ALGORITHM.");
     }
 }
