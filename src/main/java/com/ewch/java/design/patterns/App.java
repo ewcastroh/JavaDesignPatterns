@@ -18,6 +18,9 @@ import com.ewch.java.design.patterns.behavioral.observer.Coche;
 import com.ewch.java.design.patterns.behavioral.observer.MessagePublisher;
 import com.ewch.java.design.patterns.behavioral.observer.Peaton;
 import com.ewch.java.design.patterns.behavioral.observer.Semaforo;
+import com.ewch.java.design.patterns.behavioral.state.MobileAlertStateContext;
+import com.ewch.java.design.patterns.behavioral.state.Silent;
+import com.ewch.java.design.patterns.behavioral.state.Vibration;
 import com.ewch.java.design.patterns.creational.abstractFactory.AbstractFactory;
 import com.ewch.java.design.patterns.creational.abstractFactory.FactoryProvider;
 import com.ewch.java.design.patterns.creational.abstractFactory.card.Card;
@@ -86,7 +89,10 @@ public class App
         // testMemento();
 
         // Observer
-        testObserver();
+        // testObserver();
+
+        // State
+        testState();
     }
 
 
@@ -274,5 +280,20 @@ public class App
         }
 
         messagePublisher.notifyUpdate(new Semaforo("VERDE_COCHE"));
+    }
+
+    // State
+    private static void testState() {
+        System.out.println("--- STATE ---");
+
+        MobileAlertStateContext context = new MobileAlertStateContext();
+        context.alert();
+        context.alert();
+        context.setCurrentState(new Vibration());
+        context.alert();
+        context.alert();
+        context.setCurrentState(new Silent());
+        context.alert();
+        context.alert();
     }
 }
