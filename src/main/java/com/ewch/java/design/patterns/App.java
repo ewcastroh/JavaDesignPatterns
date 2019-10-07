@@ -5,6 +5,10 @@ import com.ewch.java.design.patterns.behavioral.command.CreditCard;
 import com.ewch.java.design.patterns.behavioral.command.CreditCardActivateCommand;
 import com.ewch.java.design.patterns.behavioral.command.CreditCardDeactivateCommand;
 import com.ewch.java.design.patterns.behavioral.command.CreditCardInvoker;
+import com.ewch.java.design.patterns.behavioral.interpreter.AndExpression;
+import com.ewch.java.design.patterns.behavioral.interpreter.Expression;
+import com.ewch.java.design.patterns.behavioral.interpreter.OrExpression;
+import com.ewch.java.design.patterns.behavioral.interpreter.TerminalExpression;
 import com.ewch.java.design.patterns.behavioral.iterator.CardList;
 import com.ewch.java.design.patterns.behavioral.iterator.Iterator;
 import com.ewch.java.design.patterns.behavioral.iterator.List;
@@ -92,7 +96,10 @@ public class App
         // testObserver();
 
         // State
-        testState();
+        // testState();
+
+        // Interpreter
+        testInterpreter();
     }
 
 
@@ -295,5 +302,22 @@ public class App
         context.setCurrentState(new Silent());
         context.alert();
         context.alert();
+    }
+
+    // Interpreter
+    private static void testInterpreter() {
+        System.out.println("--- INTERPRETER ---");
+
+        Expression cero = new TerminalExpression("0");
+        Expression uno = new TerminalExpression("1");
+
+        Expression containBoolean = new OrExpression(cero, uno);
+        Expression containOneAndCero = new AndExpression(cero, uno);
+
+        System.out.println("containBoolean.interpret('cero'): " + containBoolean.interpret("cero"));
+        System.out.println("containBoolean.interpret('0'): " + containBoolean.interpret("0"));
+
+        System.out.println("containOneAndCero.interpret('0'): " + containOneAndCero.interpret("0"));
+        System.out.println("containOneAndCero.interpret('0, 1'): " + containOneAndCero.interpret("0, 1"));
     }
 }
