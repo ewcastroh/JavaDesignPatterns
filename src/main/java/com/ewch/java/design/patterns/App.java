@@ -28,6 +28,8 @@ import com.ewch.java.design.patterns.behavioral.state.Vibration;
 import com.ewch.java.design.patterns.behavioral.strategy.CapitalStrategyTextFormatter;
 import com.ewch.java.design.patterns.behavioral.strategy.Context;
 import com.ewch.java.design.patterns.behavioral.strategy.LowerStrategyTextFormatter;
+import com.ewch.java.design.patterns.behavioral.templatemethod.Paypal;
+import com.ewch.java.design.patterns.behavioral.templatemethod.Visa;
 import com.ewch.java.design.patterns.creational.abstractFactory.AbstractFactory;
 import com.ewch.java.design.patterns.creational.abstractFactory.FactoryProvider;
 import com.ewch.java.design.patterns.creational.abstractFactory.card.Card;
@@ -105,7 +107,10 @@ public class App
         // testInterpreter();
 
         // Strategy
-        testStrategy();
+        // testStrategy();
+
+        // Template Method
+        testTemplateMethod();
     }
 
 
@@ -336,5 +341,18 @@ public class App
 
         Context contextLowerCase = new Context(new LowerStrategyTextFormatter());
         contextLowerCase.publishText("THIS TEXT WILL BE TURN IN lowercase USING THE ALGORITHM.");
+    }
+
+    // Template Method
+    private static void testTemplateMethod() {
+        System.out.println("--- TEMPLATE METHOD ---");
+
+        System.out.println("Payment with Visa:");
+        com.ewch.java.design.patterns.behavioral.templatemethod.Payment paymentVisa = new Visa();
+        paymentVisa.makePayment();
+
+        System.out.println("Payment with Payment:");
+        com.ewch.java.design.patterns.behavioral.templatemethod.Payment paymentPaypal = new Paypal();
+        paymentPaypal.makePayment();
     }
 }
