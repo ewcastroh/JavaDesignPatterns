@@ -30,6 +30,7 @@ import com.ewch.java.design.patterns.behavioral.strategy.Context;
 import com.ewch.java.design.patterns.behavioral.strategy.LowerStrategyTextFormatter;
 import com.ewch.java.design.patterns.behavioral.templatemethod.Paypal;
 import com.ewch.java.design.patterns.behavioral.templatemethod.Visa;
+import com.ewch.java.design.patterns.behavioral.visitor.*;
 import com.ewch.java.design.patterns.creational.abstractFactory.AbstractFactory;
 import com.ewch.java.design.patterns.creational.abstractFactory.FactoryProvider;
 import com.ewch.java.design.patterns.creational.abstractFactory.card.Card;
@@ -110,7 +111,10 @@ public class App
         // testStrategy();
 
         // Template Method
-        testTemplateMethod();
+        // testTemplateMethod();
+
+        // Visitor
+        testVisitor();
     }
 
 
@@ -355,4 +359,18 @@ public class App
         com.ewch.java.design.patterns.behavioral.templatemethod.Payment paymentPaypal = new Paypal();
         paymentPaypal.makePayment();
     }
+
+    // Visitor
+    private static void testVisitor() {
+        System.out.println("--- VISITOR ---");
+
+        System.out.println("Paying Gas with Black Card");
+        ElementOffer elementOffer = new GasOffer();
+        elementOffer.accept(new BlackCreditCardVisitor());
+
+        System.out.println("Paying Fly with Classic Card");
+        elementOffer = new FlyOffer();
+        elementOffer.accept(new ClassicCreditCardVisitor());
+    }
+
 }
