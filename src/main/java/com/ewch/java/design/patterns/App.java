@@ -114,7 +114,17 @@ public class App
         // testTemplateMethod();
 
         // Visitor
-        testVisitor();
+        // testVisitor();
+
+
+        // STRUCTURAL PATTERNS
+        System.out.println("***************************");
+        System.out.println("*** STRUCTURAL PATTERNS ***");
+        System.out.println("***************************");
+        System.out.println();
+
+        // Adapter
+        testAdapter();
     }
 
 
@@ -373,4 +383,17 @@ public class App
         elementOffer.accept(new ClassicCreditCardVisitor());
     }
 
+
+    // STRUCTURAL PATTERNS
+
+    // Adapter
+    private static void testAdapter() {
+        System.out.println("--- ADAPTER ---");
+
+        com.ewch.java.design.patterns.structural.adapter.CreditCard creditCard = new com.ewch.java.design.patterns.structural.adapter.CreditCard();
+        creditCard.pay("classic");
+        creditCard.pay("gold");
+        creditCard.pay("black");
+        creditCard.pay("silver");
+    }
 }
