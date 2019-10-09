@@ -43,6 +43,10 @@ import com.ewch.java.design.patterns.creational.prototype.PrototypeFactory;
 import com.ewch.java.design.patterns.structural.bridge.ClassicCreditCard;
 import com.ewch.java.design.patterns.structural.bridge.SecuredCreditCard;
 import com.ewch.java.design.patterns.structural.bridge.UnsecuredCreditCard;
+import com.ewch.java.design.patterns.structural.composite.AccountComponent;
+import com.ewch.java.design.patterns.structural.composite.CheckingAccount;
+import com.ewch.java.design.patterns.structural.composite.CompositeAccount;
+import com.ewch.java.design.patterns.structural.composite.SavingsAccount;
 
 /**
  * Java Design Patterns
@@ -130,7 +134,10 @@ public class App
         // testAdapter();
 
         // Bridge
-        testBridge();
+        // testBridge();
+
+        // Composite
+        testComposite();
     }
 
 
@@ -414,5 +421,30 @@ public class App
         System.out.println("Payment with classic card with secured credit card.");
         com.ewch.java.design.patterns.structural.bridge.CreditCard securedClassicCreditCard = new ClassicCreditCard(new SecuredCreditCard());
         securedClassicCreditCard.doPayment();
+    }
+
+    // Composite
+    private static void testComposite() {
+        System.out.println("--- COMPOSITE ---");
+
+        System.out.println("Creating Checking account...");
+        AccountComponent checkingAccount = new CheckingAccount("Eimer", 1000.0);
+        System.out.println("Checking account belongs to:");
+        checkingAccount.showAccountName();
+        System.out.println("Checking account with amount of : " + checkingAccount.getAmount());
+
+        System.out.println("Creating Savings account...");
+        AccountComponent savingsAccount = new SavingsAccount("Eimer", 20000.0);
+        System.out.println("Savings account belongs to:");
+        savingsAccount.showAccountName();
+        System.out.println("Savings account with amount of : " + savingsAccount.getAmount());
+
+        System.out.println("Composite Account:");
+        CompositeAccount compositeAccount = new CompositeAccount();
+        compositeAccount.addAccount(checkingAccount);
+        compositeAccount.addAccount(savingsAccount);
+
+        compositeAccount.showAccountName();
+        compositeAccount.getAmount();
     }
 }
