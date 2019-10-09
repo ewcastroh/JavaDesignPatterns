@@ -47,6 +47,7 @@ import com.ewch.java.design.patterns.structural.composite.AccountComponent;
 import com.ewch.java.design.patterns.structural.composite.CheckingAccount;
 import com.ewch.java.design.patterns.structural.composite.CompositeAccount;
 import com.ewch.java.design.patterns.structural.composite.SavingsAccount;
+import com.ewch.java.design.patterns.structural.decorator.*;
 
 /**
  * Java Design Patterns
@@ -137,7 +138,10 @@ public class App
         // testBridge();
 
         // Composite
-        testComposite();
+        // testComposite();
+
+        // Decorator
+        testDecorator();
     }
 
 
@@ -446,5 +450,27 @@ public class App
 
         compositeAccount.showAccountName();
         compositeAccount.getAmount();
+    }
+
+    // Decorator
+    private static void testDecorator() {
+        System.out.println("--- DECORATOR ---");
+
+        Credit gold = new Gold();
+        Credit blackInternationalPayment = new Black();
+        blackInternationalPayment = new InternationalPaymentDecorator(blackInternationalPayment);
+
+        Credit goldSecureInternationalPayment = new Gold();
+        goldSecureInternationalPayment = new InternationalPaymentDecorator(goldSecureInternationalPayment);
+        goldSecureInternationalPayment = new SecureDecorator(goldSecureInternationalPayment);
+
+        System.out.println("Gold card with configuration");
+        gold.showCredit();
+
+        System.out.println("Black card with configuration");
+        blackInternationalPayment.showCredit();
+
+        System.out.println("Gold2 card with configuration");
+        goldSecureInternationalPayment.showCredit();
     }
 }
