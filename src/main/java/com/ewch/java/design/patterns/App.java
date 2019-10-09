@@ -40,6 +40,9 @@ import com.ewch.java.design.patterns.creational.factoryMethod.PaymentFactory;
 import com.ewch.java.design.patterns.creational.factoryMethod.PaymentType;
 import com.ewch.java.design.patterns.creational.prototype.PrototypeCard;
 import com.ewch.java.design.patterns.creational.prototype.PrototypeFactory;
+import com.ewch.java.design.patterns.structural.bridge.ClassicCreditCard;
+import com.ewch.java.design.patterns.structural.bridge.SecuredCreditCard;
+import com.ewch.java.design.patterns.structural.bridge.UnsecuredCreditCard;
 
 /**
  * Java Design Patterns
@@ -124,7 +127,10 @@ public class App
         System.out.println();
 
         // Adapter
-        testAdapter();
+        // testAdapter();
+
+        // Bridge
+        testBridge();
     }
 
 
@@ -395,5 +401,18 @@ public class App
         creditCard.pay("gold");
         creditCard.pay("black");
         creditCard.pay("silver");
+    }
+
+    // Bridge
+    private static void testBridge() {
+        System.out.println("--- BRIDGE ---");
+
+        System.out.println("Payment with classic card with unsecured credit card.");
+        com.ewch.java.design.patterns.structural.bridge.CreditCard unsecuredClassicCreditCard = new ClassicCreditCard(new UnsecuredCreditCard());
+        unsecuredClassicCreditCard.doPayment();
+
+        System.out.println("Payment with classic card with secured credit card.");
+        com.ewch.java.design.patterns.structural.bridge.CreditCard securedClassicCreditCard = new ClassicCreditCard(new SecuredCreditCard());
+        securedClassicCreditCard.doPayment();
     }
 }
