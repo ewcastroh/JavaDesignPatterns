@@ -51,6 +51,8 @@ import com.ewch.java.design.patterns.structural.decorator.*;
 import com.ewch.java.design.patterns.structural.facade.CreditMarketFacade;
 import com.ewch.java.design.patterns.structural.flyweight.Enemy;
 import com.ewch.java.design.patterns.structural.flyweight.EnemyFactory;
+import com.ewch.java.design.patterns.structural.proxy.Internet;
+import com.ewch.java.design.patterns.structural.proxy.ProxyInternet;
 
 import java.util.Random;
 
@@ -150,7 +152,12 @@ public class App
 
         // Facade
         // testFacade();
-        testFlyweight();
+
+        // Flyweight
+        // testFlyweight();
+
+        // Proxy
+        testProxy();
     }
 
 
@@ -501,10 +508,12 @@ public class App
     private static void testFlyweight() {
         System.out.println("--- FLYWEIGHT ---");
 
+        System.out.println("Creating enemies...");
         for (int i = 0; i < 15; i++) {
             Enemy enemy = EnemyFactory.getEnemy(getRandomEnemyType());
             enemy.setWeapon(getRandomWeapon());
             enemy.lifePoints();
+            System.out.println("New Enemy: " + enemy.toString());
         }
     }
 
@@ -522,4 +531,20 @@ public class App
 
     private static String[] enemyType = {"Private", "Detective"};
     private static String[] weaponType = {"Fusil", "Revolver", "Pistola", "Metralleta", "Lanza Granadas", "9mm"};
+
+    // Proxy
+    private static void testProxy() {
+        System.out.println("--- PROXY ---");
+
+        Internet internet = new ProxyInternet();
+        try {
+            System.out.println("Connecting to allowed URL...");
+            internet.connectTo("udemy.com");
+            System.out.println("Connecting to forbidden URL...");
+            internet.connectTo("facebook.com");
+        } catch (Exception e) {
+            System.out.println("User tried to connect to a forbidden URL:");
+            System.out.println(e.getMessage());
+        }
+    }
 }
