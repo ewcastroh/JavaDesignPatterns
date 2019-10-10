@@ -48,6 +48,7 @@ import com.ewch.java.design.patterns.structural.composite.CheckingAccount;
 import com.ewch.java.design.patterns.structural.composite.CompositeAccount;
 import com.ewch.java.design.patterns.structural.composite.SavingsAccount;
 import com.ewch.java.design.patterns.structural.decorator.*;
+import com.ewch.java.design.patterns.structural.facade.CreditMarketFacade;
 
 /**
  * Java Design Patterns
@@ -141,7 +142,10 @@ public class App
         // testComposite();
 
         // Decorator
-        testDecorator();
+        // testDecorator();
+
+        // Facade
+        testFacade();
     }
 
 
@@ -472,5 +476,19 @@ public class App
 
         System.out.println("Gold2 card with configuration");
         goldSecureInternationalPayment.showCredit();
+    }
+
+    // Facade
+    private static void testFacade() {
+        System.out.println("--- FACADE ---");
+
+        System.out.println("Creating Facade...");
+        CreditMarketFacade creditMarketFacade = new CreditMarketFacade();
+        System.out.println("Accessing showCreditCard from Gold Card using Facade.");
+        creditMarketFacade.showCreditGold();
+        System.out.println("Accessing showCreditCard from Silver Card using Facade.");
+        creditMarketFacade.showCreditSilver();
+        System.out.println("Accessing showCreditCard from Black Card using Facade.");
+        creditMarketFacade.showCreditBlack();
     }
 }
