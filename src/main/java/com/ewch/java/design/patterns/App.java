@@ -49,6 +49,10 @@ import com.ewch.java.design.patterns.structural.composite.CompositeAccount;
 import com.ewch.java.design.patterns.structural.composite.SavingsAccount;
 import com.ewch.java.design.patterns.structural.decorator.*;
 import com.ewch.java.design.patterns.structural.facade.CreditMarketFacade;
+import com.ewch.java.design.patterns.structural.flyweight.Enemy;
+import com.ewch.java.design.patterns.structural.flyweight.EnemyFactory;
+
+import java.util.Random;
 
 /**
  * Java Design Patterns
@@ -145,7 +149,8 @@ public class App
         // testDecorator();
 
         // Facade
-        testFacade();
+        // testFacade();
+        testFlyweight();
     }
 
 
@@ -491,4 +496,30 @@ public class App
         System.out.println("Accessing showCreditCard from Black Card using Facade.");
         creditMarketFacade.showCreditBlack();
     }
+
+    // Flyweight
+    private static void testFlyweight() {
+        System.out.println("--- FLYWEIGHT ---");
+
+        for (int i = 0; i < 15; i++) {
+            Enemy enemy = EnemyFactory.getEnemy(getRandomEnemyType());
+            enemy.setWeapon(getRandomWeapon());
+            enemy.lifePoints();
+        }
+    }
+
+    private static String getRandomWeapon() {
+        Random random = new Random();
+        int randomInt = random.nextInt(weaponType.length);
+        return weaponType[randomInt];
+    }
+
+    private static String getRandomEnemyType() {
+        Random random = new Random();
+        int randomInt = random.nextInt(enemyType.length);
+        return enemyType[randomInt];
+    }
+
+    private static String[] enemyType = {"Private", "Detective"};
+    private static String[] weaponType = {"Fusil", "Revolver", "Pistola", "Metralleta", "Lanza Granadas", "9mm"};
 }
